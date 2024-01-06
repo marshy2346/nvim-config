@@ -1,5 +1,16 @@
 return {
     {
+        "Exafunction/codeium.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require("codeium").setup({
+            })
+        end
+    },
+    {
         'hrsh7th/cmp-nvim-lsp'
     },
     {
@@ -36,10 +47,13 @@ return {
                     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 }),
-                sources = cmp.config.sources({
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' }, -- For luasnip users.
-                }, {
+                sources = cmp.config.sources(
+                    {
+                        { name = 'nvim_lsp' },
+                        { name = 'luasnip' }, -- For luasnip users.
+                        { name = 'codeium' }, -- For codeium users.
+                    }, 
+                    {
                         { name = 'buffer' },
                     })
             })
