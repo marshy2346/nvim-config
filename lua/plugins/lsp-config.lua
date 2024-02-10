@@ -8,20 +8,16 @@ return {
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls" }
-            })
-        end
-    },
-    {
         "neovim/nvim-lspconfig",
         dependencies = {
             'williamboman/mason.nvim',
+            "williamboman/mason-lspconfig.nvim",
             'folke/neodev.nvim'
         },
         config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = { "lua_ls", "omnisharp" }
+            })
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             --local configs = require 'lspconfig.configs'
@@ -48,7 +44,11 @@ return {
                         }
                     }
                 },
-                capabilites = capabilities
+                capabilities = capabilities
+            })
+
+            lspconfig.omnisharp.setup({
+                capabilities = capabilities,
             })
 
             vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
