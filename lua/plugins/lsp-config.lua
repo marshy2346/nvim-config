@@ -16,7 +16,7 @@ return {
         },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "omnisharp", "tsserver", "html", "cssls" }
+                ensure_installed = { "lua_ls", "omnisharp"--[[, "tsserver", "html", "cssls"--]] }
             })
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -51,7 +51,7 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.tsserver.setup({
+            --[[lspconfig.tsserver.setup({
                 capabilities = capabilities,
             })
 
@@ -61,7 +61,7 @@ return {
 
             lspconfig.cssls.setup({
                 capabilities = capabilities,
-            })
+            })--]]
 
             vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
