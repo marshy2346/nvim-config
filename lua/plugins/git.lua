@@ -9,7 +9,7 @@ return {
             vim.keymap.set('n', '<leader>gA', ':Git add .<CR>')
             vim.keymap.set('n', '<leader>gc', function()
                 local commit_message = vim.fn.input("Commit message: ")
-                vim.cmd(':Git commit -m "'.. commit_message .. '"')
+                vim.cmd(':Git commit -m "' .. commit_message .. '"')
             end)
         end
     },
