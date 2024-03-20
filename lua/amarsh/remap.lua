@@ -44,3 +44,35 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+vim.api.nvim_create_augroup('open_qf', {
+    clear = true
+})
+vim.api.nvim_create_autocmd({"FileType"}, {
+    group = "open_qf",
+    pattern = "qf",
+    callback = function()
+        vim.schedule(function ()
+            vim.keymap.set("n", "dd", function()
+                local lineNumber = vim.fn.line('.')
+                local qfall = vim.fn.getqflist()
+                table.remove(qfall, lineNumber)
+                vim.fn.setqflist(qfall, 'r')
+                vim.cmd("copen")
+                vim.api.nvim_win_set_cursor(0, {lineNumber, 0})
+            end, {buffer = true})
+            vim.keymap.set("v", "d", function()
+                local startLineNumber = math.min(vim.fn.line('v'), vim.fn.line('.'))
+                local endLineNumber = math.max(vim.fn.line('v'), vim.fn.line('.'))
+                local qfall = vim.fn.getqflist()
+                for i = endLineNumber, startLineNumber, -1
+                do
+                    table.remove(qfall, i)
+                end
+                vim.fn.setqflist(qfall, 'r')
+                vim.cmd("copen")
+                vim.api.nvim_win_set_cursor(0, {startLineNumber, 0})
+            end, {buffer = true})
+        end)
+    end,
+})

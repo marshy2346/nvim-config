@@ -2,10 +2,20 @@ return {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        require("telescope").setup({
+        local telescope = require("telescope")
+        local actions = require("telescope.actions")
+        telescope.setup({
             defaults = {
                 path_display = {
                     "truncate",
+                }
+            },
+            mappings = {
+                i = {
+                    ["<C-q>"] = actions.send_to_qflist
+                },
+                n = {
+                    ["q"] = actions.send_to_qflist
                 }
             }
         })

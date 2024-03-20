@@ -18,7 +18,10 @@ return {
             })
 
 
-            vim.keymap.set('n', '<leader>rt', ":lua require(\"neotest\").run.run()<CR>")
+            --vim.keymap.set('n', '<leader>rt', ":lua require(\"neotest\").run.run()<CR>")
+            vim.keymap.set('n', '<leader>rt', function ()
+               require("neotest").run.run()
+            end)
         end
     },
 }
