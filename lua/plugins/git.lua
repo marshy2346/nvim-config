@@ -5,7 +5,7 @@ return {
             vim.keymap.set('n', '<leader>gs', ':Git status<CR>')
             vim.keymap.set('n', '<leader>gp', ':Git pull<CR>')
             vim.keymap.set('n', '<leader>gP', ':Git push<CR>')
-            vim.keymap.set('n', '<leader>ga', ':Git add ' .. vim.fn.expand('%:p') .. '<CR>')
+            vim.keymap.set('n', '<leader>ga', ':Git add %:p <CR>')
             vim.keymap.set('n', '<leader>gA', ':Git add .<CR>')
             vim.keymap.set('n', '<leader>gc', function()
                 local commit_message = vim.fn.input("Commit message: ")
