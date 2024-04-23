@@ -8,12 +8,20 @@ return {
 --            --        vim.cmd.colorscheme "catppuccin-mocha"
 --        end
 --    },
+    --{
+    --    "folke/tokyonight.nvim",
+    --    lazy = false,
+    --    priority = 1000,
+    --    config = function()
+    --        vim.cmd[[colorscheme tokyonight]]
+    --    end
+    --}
     {
-        "folke/tokyonight.nvim",
+        "tanvirtin/monokai.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme tokyonight]]
+            vim.cmd[[colorscheme monokai]]
         end
     }
 }

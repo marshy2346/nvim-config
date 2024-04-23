@@ -16,25 +16,10 @@ return {
         },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "omnisharp"--[[, "tsserver", "html", "cssls"--]] }
+                ensure_installed = { "lua_ls", "pylsp", "tsserver", "html", "cssls" }
             })
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            --local configs = require 'lspconfig.configs'
-
-            -- Check if the config is already defined (useful when reloading this file)
-            --if not configs.roslyn_vscode then
-                --configs.roslyn_vscode = {
-                    --default_config = {
-                        --cmd = {'/home/neovim/lua-language-server/run.sh'},
-                        --filetypes = {'cs', 'csproj'},
-                        --root_dir = function(fname)
-                            --return lspconfig.util.find_git_ancestor(fname)
-                        --end,
-                        --settings = {},
-                    --},
-                --}
-            --end
 
             lspconfig.lua_ls.setup({
                 settings = {
@@ -47,11 +32,11 @@ return {
                 capabilities = capabilities
             })
 
-            lspconfig.omnisharp.setup({
+            lspconfig.pylsp.setup({
                 capabilities = capabilities,
             })
 
-            --[[lspconfig.tsserver.setup({
+            lspconfig.tsserver.setup({
                 capabilities = capabilities,
             })
 
@@ -61,7 +46,7 @@ return {
 
             lspconfig.cssls.setup({
                 capabilities = capabilities,
-            })--]]
+            })
 
             vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
