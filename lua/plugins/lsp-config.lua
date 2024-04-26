@@ -16,7 +16,7 @@ return {
         },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pylsp", "tsserver", "html", "cssls" }
+                ensure_installed = { "lua_ls", "pylsp", "tsserver", "html", "cssls", "eslint" }
             })
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -37,6 +37,10 @@ return {
             })
 
             lspconfig.tsserver.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.eslint.setup({
                 capabilities = capabilities,
             })
 
@@ -75,5 +79,14 @@ return {
                 end,
             })
         end
+    },
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     }
 }
