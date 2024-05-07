@@ -13,6 +13,11 @@ return {
                     is_hidden_file = function(name, bufnr)
                         return vim.startswith(name, ".")
                     end,
+                },
+                keymaps =  {
+                    ["<C-s>"] = false,
+                    ["<C-h>"] = false,
+                    ["<C-l>"] = false,
                 }
             })
         end
