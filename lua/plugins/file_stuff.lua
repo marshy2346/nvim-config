@@ -4,7 +4,7 @@ return {
         opts = {},
         -- Optional dependencies
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function ()
+        config = function()
             require("oil").setup({
                 view_options = {
                     -- Show files and directories that start with "."
@@ -14,7 +14,7 @@ return {
                         return vim.startswith(name, ".")
                     end,
                 },
-                keymaps =  {
+                keymaps = {
                     ["<C-s>"] = false,
                     ["<C-h>"] = false,
                     ["<C-l>"] = false,
@@ -28,12 +28,12 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
-        config = function ()
+        config = function()
             local harpoon = require("harpoon")
 
             harpoon:setup()
 
-            vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+            vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
             vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
             vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)

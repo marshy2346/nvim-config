@@ -56,6 +56,7 @@ return {
                     },
                     {
                         { name = 'buffer' },
+                        { name = 'path' },
                     })
             })
         end

@@ -21,5 +21,15 @@ return {
 
             vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk_inline)
         end
+    },
+    {
+        "sindrets/diffview.nvim",
+        config = function()
+            local diffview = require("diffview")
+            diffview.setup()
+
+            vim.keymap.set('n', '<leader>gd', diffview.open)
+
+        end
     }
 }
