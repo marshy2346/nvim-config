@@ -16,7 +16,16 @@ return {
         },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pylsp", "tsserver", "html", "cssls", "eslint" }
+                ensure_installed = {
+                    "lua_ls",
+                    "pylsp",
+                    "tsserver",
+                    "html",
+                    "cssls",
+                    "eslint",
+                    "zls",
+                    "clangd"
+                }
             })
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -33,6 +42,17 @@ return {
             })
 
             lspconfig.pylsp.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.zls.setup({
+                capabilities = capabilities,
+            })
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.gdscript.setup({
                 capabilities = capabilities,
             })
 

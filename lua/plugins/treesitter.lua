@@ -6,10 +6,10 @@ return {
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = {"c", "lua", "vim", "vimdoc", "query", "python", "javascript", "html", "css", "sql"},
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript", "html", "css", "sql", "gdscript", "godot_resource", "gdshader", "zig" },
                 sync_install = false,
-                highlight = {enable = true},
-                indent = {enable = true}
+                highlight = { enable = true },
+                indent = { enable = true }
             })
         end
     },
@@ -19,8 +19,8 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "tanvirtin/monokai.nvim"
         },
-        config = function ()
-            require('treesitter-context').setup{
+        config = function()
+            require('treesitter-context').setup {
                 enable = true,
                 max_lines = 0,
                 line_numbers = true,
