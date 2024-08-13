@@ -24,6 +24,8 @@ return {
                     "cssls",
                     "eslint",
                     "zls",
+                    "yamlls",
+                    "jdtls",
                     "clangd"
                 }
             })
@@ -45,9 +47,14 @@ return {
                 capabilities = capabilities,
             })
 
+            lspconfig.jdtls.setup({
+                capabilities = capabilities,
+            })
+
             lspconfig.zls.setup({
                 capabilities = capabilities,
             })
+
             lspconfig.clangd.setup({
                 capabilities = capabilities,
             })

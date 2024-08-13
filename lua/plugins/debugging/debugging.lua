@@ -4,25 +4,24 @@ return {
         'rcarriga/nvim-dap-ui',
         'nvim-neotest/nvim-nio',
         'williamboman/mason.nvim',
-        'jay-babu/mason-nvim-dap.nvim'
+        'jay-babu/mason-nvim-dap.nvim',
+        'Weissle/persistent-breakpoints.nvim',
+        'jonathan-elize/dap-info.nvim',
     },
     config = function()
+        require('dap-info').setup({})
         local dap = require('dap')
         local dapui = require('dapui')
+        local persist = require('persistent-breakpoints')
+        local persistapi = require('persistent-breakpoints.api')
+        local info = require("dap-info.breakpoint-info-utils")
+        persist.setup{
+            load_breakpoints_event = { "BufReadPost" }
+        }
 
         require('mason-nvim-dap').setup({
-            ensure_installed = { "python" },
+            ensure_installed = { "python", "node2" },
         })
-
-        dap.adapters.godot = {
-            type = 'server',
-            host = '127.0.0.1',
-            port = '6006',
-            -- executable = {
-            --     command = 'godot',
-            --     args = { '--debug', '--path', '${workspaceFolder}' },
-            -- }
-        }
 
         dap.configurations.gdscript = {
             {
@@ -34,15 +33,28 @@ return {
             },
         }
 
+        dap.configurations.javascript = {
+            {
+                type = 'javascript',
+                request = 'launch',
+                name = 'Launch',
+                program = '${file}',
+            }
+        }
+
+
+        local windowOpts = {
+            height = 2,
+            width = 80,
+        }
         -- Basic debugging keymaps, feel free to change to your liking!
         vim.keymap.set('n', '<leader>C', dap.continue, { desc = 'Debug: Start/Continue' })
         vim.keymap.set('n', '<C-A>', dap.step_into, { desc = 'Debug: Step Into' })
         vim.keymap.set('n', '<C-S>', dap.step_over, { desc = 'Debug: Step Over' })
         --vim.keymap.set('n', '<C-Q>', dap.step_out, { desc = 'Debug: Step Out' })
-        vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-        vim.keymap.set('n', '<leader>B', function()
-            dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end, { desc = 'Debug: Set Breakpoint' })
+        vim.keymap.set('n', '<leader>b', persistapi.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+        vim.keymap.set('n', '<leader>B', persistapi.set_conditional_breakpoint, { desc = 'Debug: Set Breakpoint' })
+        vim.keymap.set('n', '<leader>Bg', info.show_breakpoint_info_on_current_line)
 
         -- Dap UI setup
         -- For more information, see |:help nvim-dap-ui|
@@ -67,7 +79,7 @@ return {
         }
 
         -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-        vim.keymap.set('n', '<C-D><C-T>', dapui.toggle, { desc = 'Debug: See last session result.' })
+        -- vim.keymap.set('n', '<C-D><C-T>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
         dap.listeners.after.event_initialized['dapui_config'] = dapui.open
         dap.listeners.before.event_terminated['dapui_config'] = dapui.close
