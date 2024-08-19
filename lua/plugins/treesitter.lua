@@ -20,6 +20,7 @@ return {
                     "gdscript",
                     "godot_resource",
                     "gdshader",
+                    "glsl",
                     "yaml",
                     "dockerfile",
                     "zig"
