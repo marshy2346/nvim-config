@@ -17,16 +17,17 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "lua_ls",
-                    "pylsp",
-                    "tsserver",
-                    "html",
+                    "clangd",
                     "cssls",
                     "eslint",
-                    "zls",
-                    "yamlls",
+                    "html",
                     "jdtls",
-                    "clangd"
+                    "lua_ls",
+                    "pylsp",
+                    "terraformls",
+                    "tsserver",
+                    "yamlls",
+                    "zls",
                 }
             })
             local lspconfig = require("lspconfig")
@@ -43,7 +44,29 @@ return {
                 capabilities = capabilities
             })
 
+            -- lspconfig.pyright.setup({
+            --     python = {
+            --         analysis = {
+            --             autoSearchPaths = true,
+            --             diagnosticMode = "workspace",
+            --             useLibraryCodeForTypes = true,
+            --             venvPath = '/Users/alexmar/Library/Caches/pypoetry/virtualenvs/'
+            --         }
+            --     },
+            --     capabilities = capabilities
+            -- })
             lspconfig.pylsp.setup({
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            black = {enabled = true },
+                            pycodestyle = {
+                                maxLineLength = 120
+                            },
+                            pylsp_mypy = { enabled = true },
+                        }
+                    }
+                },
                 capabilities = capabilities,
             })
 
@@ -76,6 +99,10 @@ return {
             })
 
             lspconfig.cssls.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.terraformls.setup({
                 capabilities = capabilities,
             })
 
