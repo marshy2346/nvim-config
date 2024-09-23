@@ -24,6 +24,7 @@ return {
                     "jdtls",
                     "lua_ls",
                     "pylsp",
+                    "pyright",
                     "terraformls",
                     "tsserver",
                     "yamlls",
@@ -44,31 +45,41 @@ return {
                 capabilities = capabilities
             })
 
-            -- lspconfig.pyright.setup({
-            --     python = {
-            --         analysis = {
-            --             autoSearchPaths = true,
-            --             diagnosticMode = "workspace",
-            --             useLibraryCodeForTypes = true,
-            --             venvPath = '/Users/alexmar/Library/Caches/pypoetry/virtualenvs/'
-            --         }
-            --     },
-            --     capabilities = capabilities
-            -- })
-            lspconfig.pylsp.setup({
-                settings = {
-                    pylsp = {
-                        plugins = {
-                            black = {enabled = true },
-                            pycodestyle = {
-                                maxLineLength = 120
-                            },
-                            pylsp_mypy = { enabled = true },
-                        }
+            lspconfig.pyright.setup({
+                -- before_init = function (_, config)
+                --     local pythonPath = require('amarsh.utils').get_python_path(config.root_dir)
+                --     config.settings.python.pythonPath = pythonPath
+                -- end,
+                python = {
+                    analysis = {
+                        autoSearchPaths = true,
+                        diagnosticMode = "workspace",
+                        useLibraryCodeForTypes = true,
                     }
                 },
-                capabilities = capabilities,
+                capabilities = capabilities
             })
+            -- lspconfig.pylsp.setup({
+            --     -- before_init = function (_, config)
+            --     --     local pythonPath = require('amarsh.utils').get_python_path()
+            --     --     config.settings.python.pythonPath = pythonPath
+            --     --     print(pythonPath)
+            --     --     print('test')
+            --     -- end,
+            --     settings = {
+            --         pylsp = {
+            --             plugins = {
+            --                 pycodestyle = {
+            --                     maxLineLength = 120
+            --                 },
+            --                 pylint = {
+            --                     enabled = true
+            --                 }
+            --             }
+            --         }
+            --     },
+            --     capabilities = capabilities,
+            -- })
 
             lspconfig.jdtls.setup({
                 capabilities = capabilities,
