@@ -81,9 +81,9 @@ return {
             --     capabilities = capabilities,
             -- })
 
-            lspconfig.jdtls.setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig.jdtls.setup({
+            --     capabilities = capabilities,
+            -- })
 
             lspconfig.zls.setup({
                 capabilities = capabilities,

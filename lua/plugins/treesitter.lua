@@ -17,6 +17,7 @@ return {
                     "graphql",
                     "html",
                     "http",
+                    "java",
                     "javascript",
                     "json",
                     "lua",
