@@ -1,4 +1,4 @@
-return {
+local lsp_config = {
     {
         "williamboman/mason.nvim",
         config = function()
@@ -12,7 +12,7 @@ return {
         dependencies = {
             'williamboman/mason.nvim',
             "williamboman/mason-lspconfig.nvim",
-            'folke/neodev.nvim'
+            'folke/neodev.nvim',
         },
         config = function()
             require("mason-lspconfig").setup({
@@ -26,7 +26,7 @@ return {
                     "pylsp",
                     "pyright",
                     "terraformls",
-                    "tsserver",
+                    "ts_ls",
                     "yamlls",
                     "zls",
                 }
@@ -97,7 +97,7 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.tsserver.setup({
+            lspconfig.ts_ls.setup({
                 capabilities = capabilities,
             })
 
@@ -155,3 +155,14 @@ return {
         },
     }
 }
+if vim.fn.has('win32') == 1 then
+    table.insert(lsp_config, {
+        "seblj/roslyn.nvim",
+        ft = "cs",
+        opts = {
+            -- your configuration comes here; leave empty for default settings
+        }
+    })
+end
+
+return lsp_config

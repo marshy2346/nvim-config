@@ -35,3 +35,10 @@ vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 --folds
 vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 20
+
+vim.filetype.add({
+    extension = {
+        uxml = "xml",
+        uss= "css",
+    }
+})

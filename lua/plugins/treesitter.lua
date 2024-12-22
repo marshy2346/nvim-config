@@ -2,6 +2,10 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ":TSUpdate",
+        dependencies = {
+            -- NOTE: additional parser
+            { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+        },
         config = function()
             local configs = require("nvim-treesitter.configs")
 
@@ -21,6 +25,7 @@ return {
                     "javascript",
                     "json",
                     "lua",
+                    "nu",
                     "python",
                     "query",
                     "sql",
