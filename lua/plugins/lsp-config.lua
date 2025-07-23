@@ -21,12 +21,13 @@ return {
                     "cssls",
                     "eslint",
                     "html",
+                    "intelephense", --PHP
                     "jdtls",
                     "lua_ls",
                     "pylsp",
                     "pyright",
                     "terraformls",
-                    "tsserver",
+                    "ts_ls",
                     "yamlls",
                     "zls",
                 }
@@ -89,6 +90,21 @@ return {
                 capabilities = capabilities,
             })
 
+            lspconfig.intelephense.setup({
+                capabilities = capabilities,
+                settings = {
+                    intelephense = {
+                        stubs = {
+                            "wordpress",
+                            "acf-pro",
+                        },
+                        environment = {
+                            includePaths = vim.fn.expand("~/.composer/vender/php-stubs/"),
+                        }
+                    }
+                }
+            })
+
             lspconfig.clangd.setup({
                 capabilities = capabilities,
             })
@@ -97,7 +113,7 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.tsserver.setup({
+            lspconfig.ts_ls.setup({
                 capabilities = capabilities,
             })
 
@@ -118,6 +134,15 @@ return {
             })
 
             vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+            -- vim.keymap.set('n', '<leader>e', function()
+            --     vim.diagnostic.config({virtual_lines = {current_line = true}, virtual_text = false})
+            --     vim.api.nvim_create_autocmd('CursorMoved', { group = vim.api.nvim_create_augroup('line-diagnostics', { clear = true }),
+            --         callback = function()
+            --             vim.diagnostic.config({virtual_lines = false, virtual_text = true})
+            --             return true
+            --         end,
+            --     })
+            -- end)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
             vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
