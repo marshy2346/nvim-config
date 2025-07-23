@@ -43,3 +43,10 @@ vim.diagnostic.config({
     virtual_text = true,
     underline = false
 })
+
+vim.filetype.add({
+    extension = {
+        uxml = "xml",
+        uss= "css",
+    }
+})
