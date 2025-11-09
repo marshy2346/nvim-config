@@ -1,0 +1,13 @@
+local keymap = vim.keymap.set
+keymap({"n", "v"}, "<leader>a", "<cmd>lua require('vscode').action('vscode-harpoon.addEditor')<CR>")
+keymap({"n", "v"}, "<leader>he", "<cmd>lua require('vscode').action('vscode-harpoon.editorQuickPick')<CR>")
+-- keymap({"n", "v"}, "<C-e>", "<cmd>lua require('vscode').action('vscode-harpoon.editEditors')<CR>")
+keymap({"n", "v"}, "<leader>1", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor1')<CR>")
+keymap({"n", "v"}, "<leader>2", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor2')<CR>")
+keymap({"n", "v"}, "<leader>3", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor3')<CR>")
+keymap({"n", "v"}, "<leader>4", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor4')<CR>")
+keymap({"n", "v"}, "<leader>5", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor5')<CR>")
+keymap({"n", "v"}, "<leader>6", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor6')<CR>")
+keymap({"n", "v"}, "<leader>7", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor7')<CR>")
+keymap({"n", "v"}, "<leader>8", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor8')<CR>")
+keymap({"n", "v"}, "<leader>9", "<cmd>lua require('vscode').action('vscode-harpoon.gotoEditor9')<CR>")
