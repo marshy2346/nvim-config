@@ -1,20 +1,23 @@
 return {
     {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
+        "mistweaverco/kulala.nvim",
+        keys = {
+            { "<leader>rr", desc = "Send request" },
+            { "<leader>RR", desc = "Send all requests" },
+            { "<leader>rb", desc = "Open scratchpad" },
+            { "<leader>rl", desc = "Replay the last request" },
+        },
+        ft = { "http", "rest" },
         opts = {
-            rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
-        }
-    },
-    {
-        "rest-nvim/rest.nvim",
-        ft = "http",
-        dependencies = { "luarocks.nvim" },
-        config = function()
-            require("rest-nvim").setup()
-            vim.keymap.set('n', '<leader>rr', '<cmd>Rest run<CR>')
-            vim.keymap.set('n', '<leader>rl', '<cmd>Rest run last<CR>')
+            -- your configuration comes here
+            global_keymaps = false,
+            global_keymaps_prefix = "<leader>r",
+            kulala_keymaps_prefix = "",
+        },
+        config = function(_, opts)
+            local kulala = require("kulala")
+            kulala.setup(opts)
+            vim.keymap.set('n', '<leader>rr', kulala.run)
         end,
-    }
+    },
 }
